@@ -1,0 +1,377 @@
+
+Test Case 0: size = 4
+--------------
+
+[[0. 3. 5. 3.]
+ [3. 0. 4. 1.]
+ [5. 4. 0. 5.]
+ [3. 1. 5. 0.]]
+
+	Brute Force
+		Solution = 1010 [0101].
+		Maxcut = 15.0.
+		Time: 0.00032589600232313387 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 1010 [0101].
+		Maxcut = 15.0.
+		Optimizer Time: 7.235343933105469 seconds.
+
+		QAOA PASSED!
+/opt/conda/lib/python3.8/site-packages/sympy/core/expr.py:3949: SymPyDeprecationWarning: 
+
+expr_free_symbols method has been deprecated since SymPy 1.9. See
+https://github.com/sympy/sympy/issues/21494 for more info.
+
+  SymPyDeprecationWarning(feature="expr_free_symbols method",
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 1010 [0101].
+		Maxcut = -14.985435848657094.
+		Optimizer Time: 2.687633514404297 seconds.
+
+
+		VQE PASSED!
+
+Test Case 1: size = 5
+--------------
+
+[[0. 1. 5. 5. 4.]
+ [1. 0. 3. 5. 1.]
+ [5. 3. 0. 4. 3.]
+ [5. 5. 4. 0. 3.]
+ [4. 1. 3. 3. 0.]]
+
+	Brute Force
+		Solution = 00110 [11001].
+		Maxcut = 24.0.
+		Time: 0.00093193399879965 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 00110 [11001].
+		Maxcut = 24.0.
+		Optimizer Time: 8.798312425613403 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 10010 [01101].
+		Maxcut = -21.958538075800423.
+		Optimizer Time: 2.9413397312164307 seconds.
+
+
+		VQE FAILED!
+
+Test Case 2: size = 6
+--------------
+
+[[0. 4. 0. 1. 1. 5.]
+ [4. 0. 2. 1. 2. 2.]
+ [0. 2. 0. 0. 5. 2.]
+ [1. 1. 0. 0. 4. 3.]
+ [1. 2. 5. 4. 0. 2.]
+ [5. 2. 2. 3. 2. 0.]]
+
+	Brute Force
+		Solution = 101100 [010011].
+		Maxcut = 27.0.
+		Time: 0.005948442998487735 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 101100 [010011].
+		Maxcut = 27.0.
+		Optimizer Time: 18.43236541748047 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 101100 [010011].
+		Maxcut = -26.96991200358059.
+		Optimizer Time: 3.955759048461914 seconds.
+
+
+		VQE PASSED!
+
+Test Case 3: size = 7
+--------------
+
+[[0. 2. 3. 4. 1. 3. 2.]
+ [2. 0. 4. 3. 1. 3. 1.]
+ [3. 4. 0. 4. 4. 3. 3.]
+ [4. 3. 4. 0. 5. 3. 3.]
+ [1. 1. 4. 5. 0. 3. 5.]
+ [3. 3. 3. 3. 3. 0. 5.]
+ [2. 1. 3. 3. 5. 5. 0.]]
+
+	Brute Force
+		Solution = 0011010 [1100101].
+		Maxcut = 43.0.
+		Time: 0.006545822998305084 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 0011010 [1100101].
+		Maxcut = 43.0.
+		Optimizer Time: 14.44683837890625 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 0101001 [1010110].
+		Maxcut = -40.95584993459288.
+		Optimizer Time: 4.627678155899048 seconds.
+
+
+		VQE FAILED!
+
+Test Case 4: size = 8
+--------------
+
+[[0. 5. 3. 1. 3. 4. 1. 3.]
+ [5. 0. 2. 3. 4. 0. 5. 1.]
+ [3. 2. 0. 3. 2. 0. 3. 5.]
+ [1. 3. 3. 0. 1. 2. 2. 5.]
+ [3. 4. 2. 1. 0. 5. 2. 2.]
+ [4. 0. 0. 2. 5. 0. 4. 3.]
+ [1. 5. 3. 2. 2. 4. 0. 4.]
+ [3. 1. 5. 5. 2. 3. 4. 0.]]
+
+	Brute Force
+		Solution = 10011010 [01100101].
+		Maxcut = 57.0.
+		Time: 0.017945201001566602 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 10011010 [01100101].
+		Maxcut = 57.0.
+		Optimizer Time: 26.24150323867798 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 01100101 [10011010].
+		Maxcut = -56.88814247263846.
+		Optimizer Time: 10.698118686676025 seconds.
+
+
+		VQE PASSED!
+
+Test Case 5: size = 9
+--------------
+
+[[0. 1. 2. 1. 4. 5. 2. 1. 5.]
+ [1. 0. 3. 3. 4. 0. 5. 5. 4.]
+ [2. 3. 0. 3. 2. 3. 1. 2. 3.]
+ [1. 3. 3. 0. 0. 2. 2. 4. 2.]
+ [4. 4. 2. 0. 0. 2. 2. 2. 3.]
+ [5. 0. 3. 2. 2. 0. 4. 3. 5.]
+ [2. 5. 1. 2. 2. 4. 0. 5. 3.]
+ [1. 5. 2. 4. 2. 3. 5. 0. 2.]
+ [5. 4. 3. 2. 3. 5. 3. 2. 0.]]
+
+	Brute Force
+		Solution = 110001010 [001110101].
+		Maxcut = 64.0.
+		Time: 0.05100577500343206 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 110001010 [001110101].
+		Maxcut = 64.0.
+		Optimizer Time: 23.831181526184082 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 001110101 [110001010].
+		Maxcut = -63.69811942873419.
+		Optimizer Time: 6.766120195388794 seconds.
+
+
+		VQE PASSED!
+
+Test Case 6: size = 10
+--------------
+
+[[0. 2. 2. 4. 2. 1. 1. 2. 5. 2.]
+ [2. 0. 3. 5. 3. 5. 1. 1. 5. 1.]
+ [2. 3. 0. 2. 0. 1. 3. 5. 5. 5.]
+ [4. 5. 2. 0. 3. 2. 4. 4. 3. 4.]
+ [2. 3. 0. 3. 0. 5. 0. 3. 2. 5.]
+ [1. 5. 1. 2. 5. 0. 2. 1. 3. 1.]
+ [1. 1. 3. 4. 0. 2. 0. 4. 1. 1.]
+ [2. 1. 5. 4. 3. 1. 4. 0. 1. 5.]
+ [5. 5. 5. 3. 2. 3. 1. 1. 0. 2.]
+ [2. 1. 5. 4. 5. 1. 1. 5. 2. 0.]]
+
+	Brute Force
+		Solution = 1110101000 [0001010111].
+		Maxcut = 79.0.
+		Time: 0.10214759999871603 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 1110101000 [0001010111].
+		Maxcut = 79.0.
+		Optimizer Time: 52.47514629364014 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 0001010110 [1110101001].
+		Maxcut = -77.09125394419453.
+		Optimizer Time: 27.61646008491516 seconds.
+
+
+		VQE FAILED!
+
+Test Case 7: size = 11
+--------------
+
+[[0. 4. 1. 5. 3. 2. 5. 4. 1. 1. 3.]
+ [4. 0. 5. 4. 4. 4. 3. 1. 4. 2. 3.]
+ [1. 5. 0. 3. 4. 5. 4. 1. 4. 3. 1.]
+ [5. 4. 3. 0. 0. 1. 3. 5. 4. 5. 2.]
+ [3. 4. 4. 0. 0. 4. 1. 4. 3. 3. 3.]
+ [2. 4. 5. 1. 4. 0. 1. 3. 1. 4. 4.]
+ [5. 3. 4. 3. 1. 1. 0. 1. 0. 2. 4.]
+ [4. 1. 1. 5. 4. 3. 1. 0. 3. 2. 3.]
+ [1. 4. 4. 4. 3. 1. 0. 3. 0. 4. 5.]
+ [1. 2. 3. 5. 3. 4. 2. 2. 4. 0. 1.]
+ [3. 3. 1. 2. 3. 4. 4. 3. 5. 1. 0.]]
+
+	Brute Force
+		Solution = 00011110100 [11100001011].
+		Maxcut = 107.0.
+		Time: 0.2462477310000395 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 00011110100 [11100001011].
+		Maxcut = 107.0.
+		Optimizer Time: 134.54077196121216 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 10111000011 [01000111100].
+		Maxcut = -99.23413989184901.
+		Optimizer Time: 45.21286201477051 seconds.
+
+
+		VQE FAILED!
+
+Test Case 8: size = 12
+--------------
+
+[[0. 1. 2. 4. 1. 4. 2. 2. 5. 5. 3. 4.]
+ [1. 0. 3. 3. 5. 3. 4. 4. 5. 2. 2. 1.]
+ [2. 3. 0. 4. 4. 5. 3. 2. 4. 4. 4. 3.]
+ [4. 3. 4. 0. 2. 3. 4. 2. 1. 0. 3. 5.]
+ [1. 5. 4. 2. 0. 2. 3. 1. 4. 5. 5. 1.]
+ [4. 3. 5. 3. 2. 0. 4. 3. 1. 3. 2. 3.]
+ [2. 4. 3. 4. 3. 4. 0. 1. 2. 5. 1. 3.]
+ [2. 4. 2. 2. 1. 3. 1. 0. 1. 3. 1. 4.]
+ [5. 5. 4. 1. 4. 1. 2. 1. 0. 4. 2. 4.]
+ [5. 2. 4. 0. 5. 3. 5. 3. 4. 0. 5. 5.]
+ [3. 2. 4. 3. 5. 2. 1. 1. 2. 5. 0. 2.]
+ [4. 1. 3. 5. 1. 3. 3. 4. 4. 5. 2. 0.]]
+
+	Brute Force
+		Solution = 000111011100 [111000100011].
+		Maxcut = 125.0.
+		Time: 0.5922544749992085 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 000111011100 [111000100011].
+		Maxcut = 125.0.
+		Optimizer Time: 353.35470056533813 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 000101111010 [111010000101].
+		Maxcut = -120.69513776756459.
+		Optimizer Time: 107.64303517341614 seconds.
+
+
+		VQE FAILED!
+
+Test Case 9: size = 13
+--------------
+
+[[0. 4. 1. 5. 4. 4. 2. 2. 4. 5. 1. 5. 1.]
+ [4. 0. 4. 3. 4. 5. 4. 2. 4. 2. 1. 5. 5.]
+ [1. 4. 0. 3. 3. 2. 4. 5. 5. 5. 1. 2. 1.]
+ [5. 3. 3. 0. 2. 4. 3. 4. 2. 3. 5. 3. 1.]
+ [4. 4. 3. 2. 0. 5. 5. 0. 4. 2. 5. 3. 1.]
+ [4. 5. 2. 4. 5. 0. 2. 1. 4. 4. 2. 4. 5.]
+ [2. 4. 4. 3. 5. 2. 0. 0. 4. 4. 2. 4. 2.]
+ [2. 2. 5. 4. 0. 1. 0. 0. 4. 3. 1. 5. 2.]
+ [4. 4. 5. 2. 4. 4. 4. 4. 0. 5. 3. 1. 1.]
+ [5. 2. 5. 3. 2. 4. 4. 3. 5. 0. 0. 2. 3.]
+ [1. 1. 1. 5. 5. 2. 2. 1. 3. 0. 0. 2. 4.]
+ [5. 5. 2. 3. 3. 4. 4. 5. 1. 2. 2. 0. 5.]
+ [1. 5. 1. 1. 1. 5. 2. 2. 1. 3. 4. 5. 0.]]
+
+	Brute Force
+		Solution = 1110011100100 [0001100011011].
+		Maxcut = 151.0.
+		Time: 1.3720475580012135 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 1110011100100 [0001100011011].
+		Maxcut = 151.0.
+		Optimizer Time: 998.3433601856232 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 1010011100101 [0101100011010].
+		Maxcut = -146.7712937720531.
+		Optimizer Time: 332.04361152648926 seconds.
+
+
+		VQE FAILED!
+
+Test Case 10: size = 14
+----------------
+
+[[0. 4. 3. 1. 0. 1. 1. 3. 1. 0. 5. 3. 3. 3.]
+ [4. 0. 3. 3. 5. 3. 5. 4. 3. 4. 4. 5. 1. 3.]
+ [3. 3. 0. 1. 1. 2. 2. 3. 1. 5. 5. 1. 2. 4.]
+ [1. 3. 1. 0. 4. 4. 2. 1. 2. 3. 5. 3. 1. 3.]
+ [0. 5. 1. 4. 0. 2. 2. 0. 0. 1. 3. 3. 2. 0.]
+ [1. 3. 2. 4. 2. 0. 5. 5. 4. 1. 5. 2. 4. 1.]
+ [1. 5. 2. 2. 2. 5. 0. 5. 1. 2. 2. 3. 3. 5.]
+ [3. 4. 3. 1. 0. 5. 5. 0. 3. 2. 5. 5. 4. 5.]
+ [1. 3. 1. 2. 0. 4. 1. 3. 0. 4. 5. 5. 5. 4.]
+ [0. 4. 5. 3. 1. 1. 2. 2. 4. 0. 5. 0. 1. 5.]
+ [5. 4. 5. 5. 3. 5. 2. 5. 5. 5. 0. 5. 5. 2.]
+ [3. 5. 1. 3. 3. 2. 3. 5. 5. 0. 5. 0. 3. 3.]
+ [3. 1. 2. 1. 2. 4. 3. 4. 5. 1. 5. 3. 0. 4.]
+ [3. 3. 4. 3. 0. 1. 5. 5. 4. 5. 2. 3. 4. 0.]]
+
+	Brute Force
+		Solution = 10111011100000 [01000100011111].
+		Maxcut = 164.0.
+		Time: 3.2270725649977976 seconds.
+
+	Quantum Approximation Optimization Algorithm (QAOA):
+		Solution = 10111011100000 [01000100011111].
+		Maxcut = 164.0.
+		Optimizer Time: 3604.1610958576202 seconds.
+
+		QAOA PASSED!
+
+	Variational Quantum Eigensolver (VQE):
+		Solution = 10011011010110 [01100100101001].
+		Maxcut = -156.59538849573846.
+		Optimizer Time: 1179.6150889396667 seconds.
+
+
+		VQE FAILED!
+
+---------------------------------------------------------
+Test Results:
+---------------------------------------------------------
+qaoa_success = 11 / 11 * 100 = 100.0%
+qaoa_failure = 0 / 11 * 100 = 0.0%
+vqe_success = 4 / 11 * 100 = 36.36363636363637%
+vqe_failure =7 / 11 * 100 = 63.63636363636363%
