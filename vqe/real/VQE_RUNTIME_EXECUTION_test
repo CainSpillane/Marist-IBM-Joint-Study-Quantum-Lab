@@ -1,0 +1,248 @@
+# Graph and Node imports
+from qiskit.quantum_info import SparsePauliOp
+import numpy as np
+import networkx as nx
+import matplotlib.pyplot as plt
+
+# --------Runtime imports----------
+from qiskit_ibm_runtime import QiskitRuntimeService
+from qiskit_ibm_runtime.program import UserMessenger, ProgramBackend
+from qiskit_ibm_runtime import QiskitRuntimeService, Estimator, Session
+from qiskit import QuantumCircuit
+
+# Old Imports
+from qiskit import Aer
+from qiskit.tools.visualization import plot_histogram
+from qiskit.circuit.library import TwoLocal
+from qiskit_optimization.applications import Maxcut, Tsp  # DEPRECATED
+
+# New Imports
+from qiskit.algorithms.optimizers import SPSA
+from qiskit.primitives import Estimator
+from qiskit_aer.primitives import Estimator as AerEstimator
+from qiskit.algorithms.minimum_eigensolvers import SamplingVQE  # new import!!!
+from qiskit.algorithms.minimum_eigensolvers import NumPyMinimumEigensolver
+
+# Save different accounts for open and premium access
+"""
+QiskitRuntimeService.save_account(
+    channel="ibm_quantum", token="60a6f674d4c3af8baad5ad33a982e531af05323b4664c4bf90ef0d6d346bac77b0317ebd2e261f7e4d4e903d5983d3435a32c3e634d0085b89d77cd42209bcfa",
+    instance="ibm-q-research-2/marist-ibm-1/main", name="premium")
+QiskitRuntimeService.save_account(
+    channel="ibm_quantum", token="60a6f674d4c3af8baad5ad33a982e531af05323b4664c4bf90ef0d6d346bac77b0317ebd2e261f7e4d4e903d5983d3435a32c3e634d0085b89d77cd42209bcfa",
+    instance="ibm-q/open/main", name="open")
+"""
+
+# Load the credentials based off whether you want to use the quantum computer or a normal simulation. Use "premium" to use ibm_guadalupe and use "open" to use "ibmq_qasm_simulator"
+# You'll need to specify the credentials when initializing QiskitRuntimeService, if they are not previously saved.
+service = QiskitRuntimeService(name="open")
+
+
+# Backend is what instance you want to use to run your program
+backend = service.backend("ibmq_qasm_simulator")
+
+
+# Circuit for VQE
+qasm = """
+OPENQASM 2.0;
+include "qelib1.inc";
+gate woLocal(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16, param17, param18, param19, param20, param21, param22, param23, param24, param25, param26, param27, param28, param29) q0, q1, q2, q3, q4 {
+  ry(4.17547467622234) q0;
+  ry(-6.28821176436223) q1;
+  ry(-1.40486327346273) q2;
+  ry(-1.65761619691524) q3;
+  ry(-6.14158138762570) q4;
+  cz q0, q1;
+  cz q1, q2;
+  cz q2, q3;
+  cz q3, q4;
+  ry(5.73372000866355) q0;
+  ry(4.44984240828826) q1;
+  ry(-2.16630455123368) q2;
+  ry(5.25310273616428) q3;
+  ry(6.60377416164812) q4;
+  cz q0, q1;
+  cz q1, q2;
+  cz q2, q3;
+  cz q3, q4;
+  ry(-3.02596698749212) q0;
+  ry(-5.23189687300101) q1;
+  ry(4.40282278376381) q2;
+  ry(-1.59837998872848) q3;
+  ry(4.87056597878950) q4;
+  cz q0, q1;
+  cz q1, q2;
+  cz q2, q3;
+  cz q3, q4;
+  ry(0.292183299692795) q0;
+  ry(4.66344709704271) q1;
+  ry(-2.75794041871292) q2;
+  ry(6.36851929306560) q3;
+  ry(1.97367616622618) q4;
+  cz q0, q1;
+  cz q1, q2;
+  cz q2, q3;
+  cz q3, q4;
+  ry(-2.59972754332686) q0;
+  ry(-6.34598189366981) q1;
+  ry(-1.63846773063449) q2;
+  ry(-0.414504994387513) q3;
+  ry(-5.76970867997880) q4;
+  cz q0, q1;
+  cz q1, q2;
+  cz q2, q3;
+  cz q3, q4;
+  ry(-7.15380384732267) q0;
+  ry(-0.901232949916589) q1;
+  ry(-0.606527349276767) q2;
+  ry(3.11855267646828) q3;
+  ry(-1.11874403569820) q4;
+}
+
+qreg q[5];
+
+woLocal(4.17547467622234,-6.28821176436223,-1.40486327346273,-1.65761619691524,-6.14158138762570,5.73372000866355,4.44984240828826,-2.16630455123368,5.25310273616428,6.60377416164812,-3.02596698749212,-5.23189687300101,4.40282278376381,-1.59837998872848,4.87056597878950,0.292183299692795,4.66344709704271,-2.75794041871292,6.36851929306560,1.97367616622618,-2.59972754332686,-6.34598189366981,-1.63846773063449,-0.414504994387513,-5.76970867997880,-7.15380384732267,-0.901232949916589,-0.606527349276767,3.11855267646828,-1.11874403569820) q[0],q[1],q[2],q[3],q[4];
+"""
+circuit = QuantumCircuit.from_qasm_str(qasm)
+
+
+def program(backend: ProgramBackend, user_messenger: UserMessenger, **kwargs):
+    """Function that does classical-quantum calculation."""
+    # UserMessenger can be used to publish interim results.
+    user_messenger.publish("This is an interim result.")
+    return "final result"
+
+
+def main(backend: ProgramBackend, user_messenger: UserMessenger, **kwargs):
+    """This is the main entry point of a runtime program.
+
+    The name of this method must not change. It also must have ``backend``
+    and ``user_messenger`` as the first two positional arguments.
+
+    Args:
+        backend: Backend for the circuits to run on.
+        user_messenger: Used to communicate with the program user.
+        kwargs: User inputs.
+    """
+    # Massage the input if necessary.
+    result = program(backend, user_messenger, **kwargs)
+    # Final result can be directly returned
+    return result
+
+
+# ///////////////////////////////////////// Graph /////////////
+n = 12  # Number of nodes in graph
+G = nx.Graph()
+G.add_nodes_from(np.arange(0, n, 1))
+elist = [
+
+    (0, 1, 1.19),
+
+    (0, 2, 1.0),
+
+    (0, 3, 1.0),
+
+    (0, 4, 1.19),
+
+    (0, 5, 1.19),
+
+    (0, 6, 1.19),
+
+    (0, 7, 1.0),
+
+    (0, 8, 1.19),
+
+    (0, 9, 1.19),
+
+    (0, 10, 1.19),
+
+    (0, 11, 1.0),
+
+    (1, 0, 1.19),
+
+    (1, 4, 1.19),
+
+    (1, 5, 1.19),
+
+    (1, 6, 1.19),
+
+    (1, 8, 1.19),
+
+    (1, 9, 1.19),
+
+    (1, 10, 1.19),
+
+    (2, 0, 1.0),
+
+    (2, 7, 1.0),
+
+    (3, 0, 1.0),
+
+    (3, 11, 1.0),
+
+    (4, 0, 1.19),
+
+    (4, 1, 1.19),
+
+    (5, 0, 1.19),
+
+    (5, 1, 1.19),
+
+    (6, 0, 1.19),
+
+    (6, 1, 1.19),
+
+    (7, 0, 1.0),
+
+    (7, 2, 1.0),
+
+    (8, 0, 1.19),
+
+    (8, 1, 1.19),
+
+    (9, 0, 1.19),
+
+    (9, 1, 1.19),
+
+    (10, 0, 1.19),
+
+    (10, 1, 1.19),
+
+    (11, 0, 1.0),
+
+    (11, 3, 1.0)]
+
+w = np.zeros([n, n])
+for i in range(n):
+    for j in range(n):
+        temp = G.get_edge_data(i, j, default=0)
+        if temp != 0:
+            w[i, j] = temp['weight']
+
+
+# Define our Qiskit Maxcut Instance
+max_cut = Maxcut(w)
+qp = max_cut.to_quadratic_program()
+
+# Translate to Ising Hamiltonian
+qubitOp, offset = qp.to_ising()
+
+ansatz = TwoLocal(qubitOp.num_qubits, 'ry', 'cz',
+                  reps=5, entanglement='linear')
+estimator = Estimator(options={"shots": 2048})
+
+observable = SparsePauliOp.from_sparse_list(
+    [("ZX", [1, 4], 1), ("YY", [0, 3], 2)], num_qubits=5)
+print(f">>> Observable: {observable.paulis}")
+
+service = QiskitRuntimeService()
+with Session(service=service, backend="ibmq_qasm_simulator") as session:
+    estimator = Estimator()
+    job = estimator.run(circuit, observable)
+    result = job.result()
+    print(f"job id: {job.job_id()}")
+    result = job.result()
+    print(result)
+    
+    # Close the session only if all jobs are finished, and you don't need to run more in the session
+    session.close()
