@@ -37,10 +37,8 @@ QiskitRuntimeService.save_account(
 # You'll need to specify the credentials when initializing QiskitRuntimeService, if they are not previously saved.
 service = QiskitRuntimeService(name="open")
 
-
 # Backend is what instance you want to use to run your program
 backend = service.backend("ibmq_qasm_simulator")
-
 
 # Circuit for VQE
 qasm = """
@@ -219,7 +217,6 @@ for i in range(n):
         if temp != 0:
             w[i, j] = temp['weight']
 
-
 # Define our Qiskit Maxcut Instance
 max_cut = Maxcut(w)
 qp = max_cut.to_quadratic_program()
@@ -243,6 +240,6 @@ with Session(service=service, backend="ibmq_qasm_simulator") as session:
     print(f"job id: {job.job_id()}")
     result = job.result()
     print(result)
-    
+
     # Close the session only if all jobs are finished, and you don't need to run more in the session
     session.close()
